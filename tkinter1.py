@@ -91,20 +91,20 @@ def crear_hyper():
     fsalida.close()
     
     
-    
-    archivos_sini=open('contactos-sini.txt','r').readlines()
-        #contactos_sini=['cramirez27@uasd.edu.do','cgrs27@gmail.com']#,'jleonel78@uasd.edu.do']
-        
-    contactos_sini=[]
-    contactos_sini = [n[:-1] for n in archivos_sini if n not in contactos_sini]
-    contactos_sini[-1]=archivos_sini[-1]
-        #print(contactos_sini)
-    fc.enviarEmail(contactos_sini,formato[3])#si quieres en modo html anadir un tercer
-        
-        #esta parte envia los correos
-        #destinatario =['cramirez27@uasd.edu.do','cgrs27@gmail.com']
-        #destinatario =['cramirez27@uasd.edu.do','cgrs27@gmail.com','jleonel78@uasd.edu.do','amoreta78@uasd.edu.do']#,
-                   #'sismos@sini.gob.do']
+    if(bool_sini.get()):
+        archivos_sini=open('contactos-sini.txt','r').readlines()
+            #contactos_sini=['cramirez27@uasd.edu.do','cgrs27@gmail.com']#,'jleonel78@uasd.edu.do']
+            
+        contactos_sini=[]
+        contactos_sini = [n[:-1] for n in archivos_sini if n not in contactos_sini]
+        contactos_sini[-1]=archivos_sini[-1]
+            #print(contactos_sini)
+        fc.enviarEmail(contactos_sini,formato[3])#si quieres en modo html anadir un tercer
+            
+            #esta parte envia los correos
+            #destinatario =['cramirez27@uasd.edu.do','cgrs27@gmail.com']
+            #destinatario =['cramirez27@uasd.edu.do','cgrs27@gmail.com','jleonel78@uasd.edu.do','amoreta78@uasd.edu.do']#,
+                       #'sismos@sini.gob.do']
     if(bool_todos.get()):
         #argumento: 'html'
         archivos_contactos=open('contactos.txt','r').readlines()
@@ -120,7 +120,7 @@ def crear_hyper():
 #parte que crea la aplicacion grafica
 root = tk.Tk()
 root.title('Hyper')
-root.geometry('500x240')
+root.geometry('540x240')
 root.resizable(width=False, height=False)
 font_size = font.Font(weight='bold',size=14)
 mag_var = tk.IntVar()
@@ -139,20 +139,21 @@ rbprom = tk.Radiobutton(text="Mag Promedio",background=backcolor,
                         font=font_size, variable=mag_var, value=4)
 
 etiqueta = tk.Label(root,text='')
-#ch_correos = tk.Checkbutton(root,text='Enviar correos a sini',variable=bool_sini)
+ch_correos = tk.Checkbutton(root,text='Enviar correos a sini',background=backcolor,
+                            font=font_size,variable=bool_sini)
 ch_todos = tk.Checkbutton(root,text='Enviar correos a todos',
                           background=backcolor,font=font_size,variable=bool_todos)
 etiqueta2 = tk.Label(root,text=' ')
 boton = tk.Button(root,text='Enviar Dummy',font=font_size,background='forest green',
                   foreground='yellow',command=crear_hyper)
-
+ch_correos.select()
 etiqueta.grid(row=1,column=1)
 rbcoda.grid(row=3,column=1)
 rblocal.grid(row=2,column=1)
 rbmw.grid(row=4,column=1)
 rbprom.grid(row=5,column=1)
-#ch_correos.grid(row=7,column=1)
-ch_todos.grid(row=5,column=2)
+ch_correos.grid(row=6,column=1)
+ch_todos.grid(row=6,column=2)
 etiqueta2.grid(row=8,column=1)
 boton.grid(row=9,column=1)
 
