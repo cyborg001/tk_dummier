@@ -349,9 +349,9 @@ def enviarEmail(destinatario,msg,modo='html'):#el modo indica si el correo es te
         h=hora.split(':')
         print(h)
         if int(h[0])<=4:
-            return str(int(h[0])+8)+':'+h[1]
+            return str(int(h[0])+8)+':'+h[1]+':'+h[2]
         else:
-            return str(int(h[0])-4)+':'+h[1]
+            return str(int(h[0])-4)+':'+h[1]+':'+h[2]
     '''
     esta funcion recibe un arreglo de correos electronicos, y un mensaje diccionario
     python el cual contiene el siguiente formato:
