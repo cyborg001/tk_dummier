@@ -1,0 +1,2 @@
+fecha, hora, lat, lon, depth, mag, comentario, 
+2014-07-02, 18:02:31, 20.129, -69.604, 120.1Km, 3.9, 62.9 Km al NNE de Cabrera. Oceano Atlantico., 

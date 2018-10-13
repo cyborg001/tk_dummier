@@ -1,0 +1,3 @@
+hyp.out
+dummyX.dat
+dummyX.copy
