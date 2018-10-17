@@ -349,7 +349,7 @@ def enviarEmail(destinatario,msg,modo='html'):#el modo indica si el correo es te
         h=hora.split(':')
         print(h)
         if int(h[0])<=4:
-            return str(int(h[0])+8)+':'+h[1]+':'+h[2]
+            return str(int(h[0])+20)+':'+h[1]+':'+h[2]# ojo hay que probar este cambio para ver si la hora da correcta
         else:
             return str(int(h[0])-4)+':'+h[1]+':'+h[2]
     '''
