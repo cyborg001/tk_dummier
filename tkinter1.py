@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 """
 Created on Fri Sep 08 11:50:37 2017
+version 1.2
 
 @author: Cgrs scripts
 """
@@ -9,6 +10,7 @@ Created on Fri Sep 08 11:50:37 2017
 import sys
 import os.path
 import funciones_sismicas as fc
+import json
 
 PYTHON_VERSION = sys.version_info.major
 
@@ -47,7 +49,7 @@ def crear_hyper():
     path_poligonos = 'provinciascsv'
     path_ciudades = 'localidades_2mundo.dat'
     hyp_path = paths[0][:-1]#'hyp.out'#r'Z:\seismo\WOR\hyp.out' 
-
+    
     fpath = open(hyp_path)
     linea = fpath.readline()
     fpath.close()
@@ -65,6 +67,7 @@ def crear_hyper():
     if os.path.isfile(salida_copy)==False:
         fsalida = open(salida_copy,'w')
         fsalida.close()
+    
 
     fsalida = open(salida_copy,'r')
     s_salida = fsalida.readlines()
@@ -89,6 +92,26 @@ def crear_hyper():
     fsalida = open(salida_copy,'w')
     fsalida.write(salida)
     fsalida.close()
+    #aqui se crea la base da datos json
+    #si el archivo esta vacion se crea la lista de jsons
+    path_json = paths[3]
+
+    if os.path.isfile(path_json)==False or open(path_json,'r').read()==''or open(path_json,'r').read() == None:
+        fjson = open(path_json,'w')
+        json.dump([formato[3]],fjson)
+        fjson.close()
+    else:
+        fjson = open(path_json,'r')
+        mijson = json.load(fjson)
+        fjson.close()
+        if formato[3] not in mijson:
+            mijson.append(formato[3])
+            fjson = open(path_json,'w')
+            json.dump(mijson,fjson)
+        fjson.close()    
+    
+        
+    
     
     
     if(bool_sini.get()):
@@ -98,18 +121,13 @@ def crear_hyper():
         contactos_sini=[]
         contactos_sini = [n[:-1] for n in archivos_sini if n not in contactos_sini]
         contactos_sini[-1]=archivos_sini[-1]
-            #print(contactos_sini)
         fc.enviarEmail(contactos_sini,formato[3])#si quieres en modo html anadir un tercer
             
             #esta parte envia los correos
             #destinatario =['cramirez27@uasd.edu.do','cgrs27@gmail.com']
-            #destinatario =['cramirez27@uasd.edu.do','cgrs27@gmail.com','jleonel78@uasd.edu.do','amoreta78@uasd.edu.do']#,
-                       #'sismos@sini.gob.do']
     if(bool_todos.get()):
         #argumento: 'html'
         archivos_contactos=open('contactos.txt','r').readlines()
-        #contactos =['cramirez27@uasd.edu.do','cgrs27@gmail.com']#,'jleonel78@uasd.edu.do']
-        #print(archivos_contactos[-1])
         contactos=[]
         contactos = [n[:-1] for n in archivos_contactos if n not in contactos]
         
@@ -120,7 +138,7 @@ def crear_hyper():
 #parte que crea la aplicacion grafica
 root = tk.Tk()
 root.title('Hyper')
-root.geometry('540x240')
+root.geometry('540x280')
 root.resizable(width=False, height=False)
 font_size = font.Font(weight='bold',size=14)
 mag_var = tk.IntVar()
@@ -128,7 +146,6 @@ bool_sini = tk.BooleanVar()
 bool_todos = tk.BooleanVar()
 backcolor='white smoke'
 root.configure(background=backcolor)
-#font_size=17
 rbcoda = tk.Radiobutton(text="Mag Coda       ",background=backcolor,
                         font=font_size,variable=mag_var, value=1)
 rblocal = tk.Radiobutton(text="Mag Local       ",background=backcolor,
@@ -154,8 +171,8 @@ rbmw.grid(row=4,column=1)
 rbprom.grid(row=5,column=1)
 ch_correos.grid(row=6,column=1)
 ch_todos.grid(row=6,column=2)
-etiqueta2.grid(row=8,column=1)
-boton.grid(row=9,column=1)
+etiqueta2.grid(row=7,column=1)
+boton.grid(row=8,column=1)
 
 
 root.mainloop()
