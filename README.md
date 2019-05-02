@@ -1,6 +1,6 @@
 # tk_dummier
 programa que genera el comentario de un evento sismico y lo publica en la pagina del sismologico
-este programa fue creado el creado el 13-10-2018
+este programa fue creado el 13-10-2018
 por carlos ramirez
 
 
