@@ -1,17 +1,11 @@
 # -*- coding: utf-8 -*-
 """
 Created on Wed Feb  6 10:03:02 2019
+modificado el viernes 10/5/2019
 
 @author: el_in
 """
 
-# -*- coding: utf-8 -*-
-"""
-Created on Fri Sep 08 11:50:37 2017
-version 1.2
-
-@author: Cgrs scripts
-"""
 
 
 import sys
