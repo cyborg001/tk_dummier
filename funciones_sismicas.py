@@ -486,10 +486,7 @@ def formatear_hyp(linea,path_poligonos,path_ciudades,magni=1):
     if magni==3:
         mag=mw
     if magni==4:
-        
-            
-        #print(promedio)
-        mag = promedio(ml,mc,mw)
+        mag = str(promedio(ml,mc,mw))
     '''
     #si cualquier mangnitud es mayor a 3.5
     if float(ml) > float(mc):
