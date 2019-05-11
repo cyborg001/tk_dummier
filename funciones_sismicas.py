@@ -486,7 +486,10 @@ def formatear_hyp(linea,path_poligonos,path_ciudades,magni=1):
     if magni==3:
         mag=mw
     if magni==4:
-        mag = str(round((float(ml)+float(mc)+float(mw))/3.0,1))
+        
+            
+        #print(promedio)
+        mag = promedio(ml,mc,mw)
     '''
     #si cualquier mangnitud es mayor a 3.5
     if float(ml) > float(mc):
@@ -545,3 +548,15 @@ def formatear_dummy(linea,ciudades,path_provincias):
     obj = {"fecha":fecha, "hora":hora, "lat":lat, "lon":lon, "depth":deph,
            "mag":mag, "comentario":comment}   
     return comentario,i_d,salida,obj
+
+    def promedio(ml,mc,mw):
+        numeros = [float(ml),float(mc),float(mw)]
+        prom = 0
+        n = 0
+        for i in range(len(numeros)):
+            if numeros[i] != None and numeros[i] != 0:
+                prom+=numeros[i]
+                n+=1
+            #print(f'{promedio} {n}')
+        prom/=n
+        return round(prom)
